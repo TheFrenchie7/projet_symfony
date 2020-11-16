@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{offre.title}} {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+                <div class="col-md-7">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                            <h1>{{offre.title}}</h1>                            
+                            <p>Ville : {{offre.ville}}</p>
+                            <p>Contrat : {{offre.contrat.nom}} </p>
+                            <p>Temps : {{offre.type.nom}}</p>
+
+                            <p>Début : {{offre.updatedAt | date("d/m/Y")}}</p>
+                            {% if offre.contrat.nom == "CDD"  %}
+                                <p> Fin : {{offre.end | date("d/m/Y")}} </p>
+                            {% endif %}
+                            <a href="" class="btn btn-primary">Postuler</a>
+                            <a href="/offres" class="btn btn-primary">Retour</a>
+                </div>           
+        </div>
+
+    </div>
+
+
+
+
+{% endblock %}
