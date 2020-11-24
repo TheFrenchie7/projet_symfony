@@ -30,15 +30,6 @@ class ListOffersController extends AbstractController
     }
 
     /**
-     * @Route("/offres/{id}", name="show_offre")
-     */
-    public function show(Offre $offre) {
-        return $this->render('offres/offre.html.twig', [
-            'offre' => $offre
-        ]);
-    }
-
-    /**
      * @Route("/offres/create", name="create_offre")
      */ 
     public function create(Offre $offre, EntityManagerInterface $em, Request $request)
@@ -68,5 +59,16 @@ class ListOffersController extends AbstractController
             'form' => $form
         ]);        
     }
+    
+    /**
+     * @Route("/offres/{id}", name="show_offre")
+     */
+    public function show(Offre $offre) {
+        return $this->render('offres/offre.html.twig', [
+            'offre' => $offre
+        ]);
+    }
+
+
 
 }
