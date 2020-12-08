@@ -3,6 +3,7 @@
 {% block title %} {{offre.title}} {% endblock %}
 
 {% block body %}
+
     <div class="container">
         <div class="row">
                 <div class="col-md-7">
@@ -11,13 +12,16 @@
                             <p>Ville : {{offre.ville}}</p>
                             <p>Contrat : {{offre.contrat.nom}} </p>
                             <p>Temps : {{offre.type.nom}}</p>
-
-                            <p>Début : {{offre.updatedAt | date("d/m/Y")}}</p>
-                            {% if offre.contrat.nom == "CDD"  %}
-                                <p> Fin : {{offre.end | date("d/m/Y")}} </p>
+                            <p>Date de création : {{offre.createdAt | date("d/m/Y")}} </p>
+                            {% if offre.updatedAt != null %}
+                                <p> Modifié le : {{offre.updatedAt | date("d/m/Y")}} </p>
                             {% endif %}
+                            {% if offre.contrat.nom == "CDD"  %}
+                                <p> Fin de la mission : {{offre.end | date("d/m/Y")}} </p>
+                            {% endif %}
+                            <p> Détails : {{offre.description}} </p>
                             <a href="" class="btn btn-primary">Postuler</a>
-                            <a href="/offres" class="btn btn-primary">Retour</a>
+                            <a href="/users/offres" class="btn btn-primary">Retour</a>
                 </div>           
         </div>
 

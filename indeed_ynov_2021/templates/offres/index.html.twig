@@ -1,25 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Toutes les offres{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            {% for offre in offres %}
-                <div class="col-md-4">
-                    <div class="card" >
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{offre.title}}</h5>                            
-                            <p class="card-text">Ville : {{offre.ville}}</p>
-                            <p>Contrat : {{offre.contrat.nom}} </p>
-                            <p>Temps : {{offre.type.nom}}</p>
-                            <a href="/offres/{{offre.id}}" class="btn btn-primary">Voir l'offre</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}            
-        </div>
+
+    <div class="mb-3">     
+        <h1> Welcome home ! </h1>
+
+    {% if app.user %}
+        <p> You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a> </p>
+    {% else %}
+        <p> You are currently logged off. Please log in or create an account. </p>
+        <a href="/login" class="btn btn-primary">Login</a>
+        <a href="/register" class="btn btn-primary">Register</a>        
+    {% endif %}
 
     </div>
 

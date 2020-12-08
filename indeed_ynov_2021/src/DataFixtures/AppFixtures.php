@@ -61,7 +61,6 @@ class AppFixtures extends Fixture
                     ->setPostcode(intval($faker->postcode))
                     ->setVille($faker->city)
                     ->setCreatedAt($faker->dateTimeBetween($startDate = '-12 months', $endDate = '-10 months'))
-                    ->setUpdatedAt($faker->dateTimeBetween($startDate = '-10 months', $endDate = '-8 months'))
                     ->setEnd($faker->dateTimeBetween('-1 months'));
             } else {
                 $offre->setContrat($contrat)
@@ -71,8 +70,7 @@ class AppFixtures extends Fixture
                     ->setAdresse($faker->address)
                     ->setPostcode(intval($faker->postcode))
                     ->setVille($faker->city)
-                    ->setCreatedAt($faker->dateTimeBetween($startDate = '-12 months', $endDate = '-10 months'))
-                    ->setUpdatedAt($faker->dateTimeBetween($startDate = '-10 months', $endDate = '-8 months'));
+                    ->setCreatedAt($faker->dateTimeBetween($startDate = '-12 months', $endDate = '-10 months'));
             }
 
             $manager->persist($offre);
