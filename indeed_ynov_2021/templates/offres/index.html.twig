@@ -11,8 +11,10 @@
         <p> You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a> </p>
     {% else %}
         <p> You are currently logged off. Please log in or create an account. </p>
+        <p> You can also <a href="/offres">continue as a guest</a> if you want to see the offers. </p>
         <a href="/login" class="btn btn-primary">Login</a>
-        <a href="/register" class="btn btn-primary">Register</a>        
+        <a href="/register" class="btn btn-primary">Register</a>
+       
     {% endif %}
 
     </div>

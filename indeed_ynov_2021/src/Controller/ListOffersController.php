@@ -30,7 +30,7 @@ class ListOffersController extends AbstractController
     }
 
     /**
-     * @Route("/users/offres", name="list_offres")
+     * @Route("/offres", name="list_offres")
      */
     public function list(OffreRepository $repository): Response
     {
@@ -90,7 +90,7 @@ class ListOffersController extends AbstractController
     }
     
     /**
-     * @Route("/users/offres/{id}", name="show_offre")
+     * @Route("/offres/show/{id}", name="show_offre")
      */
     public function show(Offre $offre) {
         return $this->render('offres/offre.html.twig', [
@@ -98,6 +98,66 @@ class ListOffersController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/users/offres/update/{id}", name="update_offre")
+     */
+    public function update(Offre $offre, Request $request, EntityManagerInterface $em) {
 
+        $form = $this->createFormBuilder($offre)
+            ->add("title", TextType::class, [
+                "attr" => [
+                    "class" => "form-control"
+                ]
+            ])
+            ->add("description", TextareaType::class)
+            ->add("adresse")
+            ->add("postcode")
+            ->add("ville")
 
+            ->add("contrat", EntityType::class, [
+                "class" => Contrat::class
+            ])
+            ->add("type", EntityType::class, [
+                "class" => Type::class
+            ])
+            ->add("end")
+            ->add("Submit", SubmitType::class, [
+                "attr" => [
+                    "class" => "btn btn-primary"
+                ]
+            ])
+            ->getForm();
+
+        $offre->setUpdatedAt(new \DateTime());
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($offre);
+            $em->flush();
+
+            return $this->redirectToRoute("list_offres");
+        }
+        
+        return $this->render('offres/update.html.twig', [
+            'form' => $form->createView(),
+            'offre' => $offre
+        ]);   
+    }
+
+    /**
+     * @Route("/users/offres/delete/{id}", name="delete_offre")
+     */
+    public function delete(Offre $offre, EntityManagerInterface $em) {
+   
+        if(!$offre) {
+            throw $this->createNotFoundException("L'offre n'a pas été trouvée.");
+        }
+
+        $em->remove($offre);
+        $em->flush();
+
+        return $this->redirectToRoute('list_offres');   
+    }
+    
 }
